@@ -30,23 +30,23 @@ function createContent(html="") {
 }
 
 function drawStitchesPer10cm() {
-    var html = '</div><h1 class="mb-3 px-1">Stiches/10 cm</h1></div>' +
-        '<form>' +
-            '<div class="mb-3">' +
-                '<label class="form-label px-1">Stiches (how many do you have)</label>' +
-                '<input type="number" class="form-control" id="stitches">' +
-            '</div>' +
-            '<div class="mb-3">' +
-                '<label class="form-label px-1">Distance (how far have got)</label>' +
-                '<input type="number" class="form-control" id="distance">' +
-            '</div>' +
-            '<div class="mb-3">' +
-                '<label class="form-label px-1">Answer (stiches/10 cm)</label>' +
-                '<input type="number" class="form-control" id="answer" readonly>' +
-            '</div>' +
-        '</form>' +
-        '<div>' +
-            '<button type="button" class="w-100 btn-lg btn btn-primary" onclick="drawHome();return false;">Home</button>' +
+    var html = '<div class="px-2 mt-2">' +
+            '<h1 class="mb-3 px-1">Stiches/10 cm</h1>' +
+            '<form>' +
+                '<div class="mb-3">' +
+                    '<label class="form-label px-1">Stiches (how many do you have)</label>' +
+                    '<input type="number" class="form-control" id="stitches">' +
+                '</div>' +
+                '<div class="mb-3">' +
+                    '<label class="form-label px-1">Distance (how far have got)</label>' +
+                    '<input type="number" class="form-control" id="distance">' +
+                '</div>' +
+                '<div class="mb-3">' +
+                    '<label class="form-label px-1">Answer (stiches/10 cm)</label>' +
+                    '<input type="number" class="form-control" id="answer" readonly>' +
+                '</div>' +
+            '</form>' +
+            '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawHome();return false;">Home</button>' +
         '</div>'
     createContent(html)
     document.getElementById("stitches").addEventListener("keyup", function (e) {
@@ -64,24 +64,24 @@ function drawStitchesPer10cm() {
 }
 
 function drawRowsForLenght() {
-    var html = '</div><h1 class="mb-3 px-1">Rows for Lenght</h1></div>' +
-    '<form>' +
-        '<div class="mb-3">' +
-            '<label class="form-label px-1">Rows (how many do you have per 10 cm)</label>' +
-            '<input type="number" class="form-control" id="rows">' +
-        '</div>' +
-        '<div class="mb-3">' +
-            '<label class="form-label px-1">Distance (how far you want to go)</label>' +
-            '<input type="number" class="form-control" id="distance">' +
-        '</div>' +
-        '<div class="mb-3">' +
-            '<label class="form-label px-1">Answer (how many rows you need)</label>' +
-            '<input type="number" class="form-control" id="answer" readonly>' +
-        '</div>' +
-    '</form>' +
-    '<div>' +
-        '<button type="button" class="w-100 btn-lg btn btn-primary" onclick="drawHome();return false;">Home</button>' +
-    '</div>'
+    var html = '<div class="px-2 mt-2">' +
+            '<h1 class="mb-3 px-1">Rows for Lenght</h1>' +
+            '<form>' +
+                '<div class="mb-3">' +
+                    '<label class="form-label px-1">Rows (how many do you have per 10 cm)</label>' +
+                    '<input type="number" class="form-control" id="rows">' +
+                '</div>' +
+                '<div class="mb-3">' +
+                    '<label class="form-label px-1">Distance (how far you want to go)</label>' +
+                    '<input type="number" class="form-control" id="distance">' +
+                '</div>' +
+                '<div class="mb-3">' +
+                    '<label class="form-label px-1">Answer (how many rows you need)</label>' +
+                    '<input type="number" class="form-control" id="answer" readonly>' +
+                '</div>' +
+            '</form>' +
+            '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawHome();return false;">Home</button>' +
+        '</div>'
     createContent(html)
     document.getElementById("rows").addEventListener("keyup", function (e) {
         calculateRowsForLenght()
@@ -98,20 +98,20 @@ function drawRowsForLenght() {
 }
 
 function drawAbout() {
-    var html = '</div><h1 class="mb-3">About</h1></div>' +
-        '<div>This is made for fun.</div>' +
-        '<div>' +
-            '<button type="button" class="w-100 btn-lg btn btn-primary" onclick="drawHome();return false;">Home</button>' +
+    var html = '<div class="px-2 mt-2">' +
+            '<h1 class="mb-3">About</h1>' +
+            'This is made for fun.' +
+            '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawHome();return false;">Home</button>' +
         '</div>'
     createContent(html)
 }
 
 function drawHome() {
-    var html = '<div class="d-grid gap-2">' +
-        '<button type="button" class="w-100 btn-lg btn btn-success" onclick="drawStitchesPer10cm();return false;">Stitches/10cm</button>' +
-        '<button type="button" class="w-100 btn-lg btn btn-danger" onclick="drawRowsForLenght();return false;">Rows for Lenght</button>' +
-        '<button type="button" class="w-100 btn-lg btn btn-primary" onclick="drawAbout();return false;">About</button>' +
-    '<div>'
+    var html = '<div class="d-grid gap-2 px-2 mt-2">' +
+            '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawStitchesPer10cm();return false;">Stitches/10cm</button>' +
+            '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawRowsForLenght();return false;">Rows for Lenght</button>' +
+            '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawAbout();return false;">About</button>' +
+        '<div>'
     createContent(html)
 }
 

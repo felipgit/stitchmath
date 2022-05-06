@@ -18,13 +18,13 @@ function createMenu() {
     '</nav>'
 
     div.innerHTML = navbar
-    document.body.appendChild(div)
+    document.getElementById("main").appendChild(div)
 }
 
 function createContent(html="") {
     var div = document.createElement("div")
     div.id = "content"
-    document.body.appendChild(div)
+    document.getElementById("main").appendChild(div)
     content = document.getElementById("content")
     content.innerHTML = html
 }

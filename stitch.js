@@ -42,19 +42,25 @@ function drawStitchesPer10cm() {
             '</div>' +
             '<div class="mb-3">' +
                 '<label class="form-label px-1">Answer (stiches/10 cm)</label>' +
-                '<input type="number" class="form-control" id="answer">' +
+                '<input type="number" class="form-control" id="answer" readonly>' +
             '</div>' +
         '</form>' +
         '<div>' +
             '<button type="button" class="w-100 btn-lg btn btn-primary" onclick="drawHome();return false;">Home</button>' +
         '</div>'
     createContent(html)
-    document.getElementById("stitches").addEventListener("keyup", function (evt) {
+    document.getElementById("stitches").addEventListener("keyup", function (e) {
         calculateStichesPer10cm()
     }, false);
-    document.getElementById("distance").addEventListener("keyup", function (evt) {
+    document.getElementById("distance").addEventListener("keyup", function (e) {
         calculateStichesPer10cm()
     }, false);
+    document.getElementById("stitches").addEventListener("input", function (e) {
+        calculateStichesPer10cm()
+    });
+    document.getElementById("distance").addEventListener("input", function (e) {
+        calculateStichesPer10cm()
+    });
 }
 
 function drawRowsForLenght() {
@@ -70,19 +76,25 @@ function drawRowsForLenght() {
         '</div>' +
         '<div class="mb-3">' +
             '<label class="form-label px-1">Answer (how many rows you need)</label>' +
-            '<input type="number" class="form-control" id="answer">' +
+            '<input type="number" class="form-control" id="answer" readonly>' +
         '</div>' +
     '</form>' +
     '<div>' +
         '<button type="button" class="w-100 btn-lg btn btn-primary" onclick="drawHome();return false;">Home</button>' +
     '</div>'
     createContent(html)
-    document.getElementById("rows").addEventListener("keyup", function (evt) {
+    document.getElementById("rows").addEventListener("keyup", function (e) {
         calculateRowsForLenght()
     }, false);
-    document.getElementById("distance").addEventListener("keyup", function (evt) {
+    document.getElementById("distance").addEventListener("keyup", function (e) {
         calculateRowsForLenght()
     }, false);
+    document.getElementById("rows").addEventListener("input", function (e) {
+        calculateRowsForLenght()
+    });
+    document.getElementById("distance").addEventListener("input", function (e) {
+        calculateRowsForLenght()
+    });
 }
 
 function drawAbout() {

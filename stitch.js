@@ -31,10 +31,10 @@ function createContent(html="") {
 
 function drawStitchesPer10cm() {
     var html = '<div class="px-2 mt-2">' +
-            '<h1 class="mb-3 px-1">Stiches/10 cm</h1>' +
+            '<h1 class="mb-3 px-1">Stitches/10 cm</h1>' +
             '<form>' +
                 '<div class="mb-3">' +
-                    '<label class="form-label px-1">Stiches (how many do you have)</label>' +
+                    '<label class="form-label px-1">Stitches (how many do you have)</label>' +
                     '<input type="number" class="form-control" id="stitches">' +
                 '</div>' +
                 '<div class="mb-3">' +
@@ -42,7 +42,7 @@ function drawStitchesPer10cm() {
                     '<input type="number" class="form-control" id="distance">' +
                 '</div>' +
                 '<div class="mb-3">' +
-                    '<label class="form-label px-1">Answer (stiches/10 cm)</label>' +
+                    '<label class="form-label px-1">Answer (stitches/10 cm)</label>' +
                     '<input type="number" class="form-control" id="answer" readonly>' +
                 '</div>' +
             '</form>' +
@@ -50,16 +50,16 @@ function drawStitchesPer10cm() {
         '</div>'
     createContent(html)
     document.getElementById("stitches").addEventListener("keyup", function (e) {
-        calculateStichesPer10cm()
+        calculateStitchesPer10cm()
     }, false);
     document.getElementById("distance").addEventListener("keyup", function (e) {
-        calculateStichesPer10cm()
+        calculateStitchesPer10cm()
     }, false);
     document.getElementById("stitches").addEventListener("input", function (e) {
-        calculateStichesPer10cm()
+        calculateStitchesPer10cm()
     });
     document.getElementById("distance").addEventListener("input", function (e) {
-        calculateStichesPer10cm()
+        calculateStitchesPer10cm()
     });
 }
 
@@ -115,10 +115,10 @@ function drawHome() {
     createContent(html)
 }
 
-function calculateStichesPer10cm() {
-    var stiches = parseInt(document.getElementById("stitches").value)
+function calculateStitchesPer10cm() {
+    var stitches = parseInt(document.getElementById("stitches").value)
     var distance = parseInt(document.getElementById("distance").value)
-    document.getElementById("answer").value = stiches/distance*10
+    document.getElementById("answer").value = stitches/distance*10
 }
 
 function calculateRowsForLenght() {

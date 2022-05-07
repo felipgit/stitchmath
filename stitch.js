@@ -3,8 +3,8 @@ function createMenu() {
     var navbar = '<nav class="navbar navbar-expand-lg navbar-light bg-light">' +
     '<div class="container-fluid">' +
         '<a class="navbar-brand" href=".">StitchMath</a>' +
-        '<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">' +
-        '<span class="navbar-toggler-icon"></span>' +
+        '<button class="navbar-toggler btn-no-style" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">' +
+            '<span class="navbar-toggler-icon"></span>' +
         '</button>' +
         '<div class="collapse navbar-collapse" id="navbarNav">' +
         '<ul class="navbar-nav">' +
@@ -29,26 +29,40 @@ function createContent(html="") {
     content.innerHTML = html
 }
 
+function urlAddPath(selection) {
+    window.history.pushState("#selection", "x", window.location.origin + "#" + selection);
+    window.history.pushState
+    window.addEventListener("popstate", historyListener, false);
+}
+
+function historyListener(event) {
+    drawHome()
+}
+
 function drawStitchesPer10cm() {
     var html = '<div class="px-2 mt-2">' +
-            '<h1 class="mb-3 px-1">Stitches/10 cm</h1>' +
-            '<form>' +
-                '<div class="mb-3">' +
-                    '<label class="form-label px-1">Stitches (how many do you have)</label>' +
-                    '<input type="number" class="form-control" id="stitches">' +
-                '</div>' +
-                '<div class="mb-3">' +
-                    '<label class="form-label px-1">Distance (how far have got)</label>' +
-                    '<input type="number" class="form-control" id="distance">' +
-                '</div>' +
-                '<div class="mb-3">' +
-                    '<label class="form-label px-1">Answer (stitches/10 cm)</label>' +
-                    '<input type="number" class="form-control" id="answer" readonly>' +
-                '</div>' +
-            '</form>' +
-            '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawHome();return false;">Home</button>' +
-        '</div>'
+                    '<h1 class="mb-3 px-1">Stitches/10 cm</h1>' +
+                    '<form>' +
+                        '<label class="form-label px-1"><b>Stitches</b> (how many do you have)</label>' +
+                        '<div class="input-group mb-3 rounded-pill bg-white">' +
+                            '<span class="input-group-icon" id="icon-stitches"><i class="fas fa-lg fa-infinity"></i></span>' +
+                            '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-stitches" id="stitches">' +
+                        '</div>' +
+                         '<label class="form-label px-1"><b>Distance</b> (how far have you got)</label>' +
+                        '<div class="input-group mb-3 rounded-pill bg-white">' +
+                            '<span class="input-group-icon" id="icon-distance"><i class="fas fa-lg fa-ruler-horizontal"></i></span>' +
+                            '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-distance" id="distance">' +
+                        '</div>' +
+                        '<label class="form-label px-1"><b>Answer</b> (stitches/10 cm)</label>' +
+                        '<div class="input-group mb-3 rounded-pill bg-white">' +
+                            '<span class="input-group-icon" id="icon-answer"><i class="fas fa-lg fa-circle-check"></i></span>' +
+                            '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-answer" id="answer" readonly>' +
+                        '</div>' +
+                    '</form>' +
+                    '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawHome();return false;">Home</button>' +
+                '</div>'
     createContent(html)
+    urlAddPath("StitchesPer10cm")
     document.getElementById("stitches").addEventListener("keyup", function (e) {
         calculateStitchesPer10cm()
     }, false);
@@ -65,24 +79,28 @@ function drawStitchesPer10cm() {
 
 function drawRowsForLenght() {
     var html = '<div class="px-2 mt-2">' +
-            '<h1 class="mb-3 px-1">Rows for Lenght</h1>' +
-            '<form>' +
-                '<div class="mb-3">' +
-                    '<label class="form-label px-1">Rows (how many do you have per 10 cm)</label>' +
-                    '<input type="number" class="form-control" id="rows">' +
-                '</div>' +
-                '<div class="mb-3">' +
-                    '<label class="form-label px-1">Distance (how far you want to go)</label>' +
-                    '<input type="number" class="form-control" id="distance">' +
-                '</div>' +
-                '<div class="mb-3">' +
-                    '<label class="form-label px-1">Answer (how many rows you need)</label>' +
-                    '<input type="number" class="form-control" id="answer" readonly>' +
-                '</div>' +
-            '</form>' +
-            '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawHome();return false;">Home</button>' +
-        '</div>'
+                    '<h1 class="mb-3 px-1">Rows for Lenght</h1>' +
+                    '<form>' +
+                    '<label class="form-label px-1"><b>Rows</b> (how many rows do you have per 10 cm)</label>' +
+                        '<div class="input-group mb-3 rounded-pill bg-white">' +
+                            '<span class="input-group-icon" id="icon-rows"><i class="fas fa-lg fa-align-justify"></i></span>' +
+                            '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-rows" id="rows">' +
+                        '</div>' +
+                         '<label class="form-label px-1"><b>Distance</b> (how far do you want to go)</label>' +
+                        '<div class="input-group mb-3 rounded-pill bg-white">' +
+                            '<span class="input-group-icon" id="icon-distance"><i class="fas fa-lg fa-ruler-horizontal"></i></span>' +
+                            '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-distance" id="distance">' +
+                        '</div>' +
+                        '<label class="form-label px-1"><b>Answer</b> (how many rows you need)</label>' +
+                        '<div class="input-group mb-3 rounded-pill bg-white">' +
+                            '<span class="input-group-icon" id="icon-answer"><i class="fas fa-lg fa-circle-check"></i></span>' +
+                            '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-answer" id="answer" readonly>' +
+                        '</div>' +
+                    '</form>' +
+                    '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawHome();return false;">Home</button>' +
+                '</div>'
     createContent(html)
+    urlAddPath("RowsForLenght")
     document.getElementById("rows").addEventListener("keyup", function (e) {
         calculateRowsForLenght()
     }, false);
@@ -99,20 +117,26 @@ function drawRowsForLenght() {
 
 function drawAbout() {
     var html = '<div class="px-2 mt-2">' +
-            '<h1 class="mb-3">About</h1>' +
-            'This is made for fun.' +
-            '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawHome();return false;">Home</button>' +
-        '</div>'
+                    '<h1 class="mb-3">About</h1>' +
+                    'This is made for fun.<br>' +
+                    'For any questions please create an issue on <a href="https://github.com/felipgit/stitchmath" target="_blank" class="link-light">GitHub</a>.' +
+                    '<div class="d-grid gap-2 px-2 mt-2">' +
+                        '<a class="w-100 btn-lg btn btn-light rounded-pill" href="https://github.com/felipgit/stitchmath" target="_blank"><i class="fab fa-github"></i> GitHub</a>' +
+                        '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawHome();return false;">Home</button>' +
+                    '<div>' +
+                '</div>'
     createContent(html)
+    urlAddPath("About")
 }
 
 function drawHome() {
     var html = '<div class="d-grid gap-2 px-2 mt-2">' +
-            '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawStitchesPer10cm();return false;">Stitches/10cm</button>' +
-            '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawRowsForLenght();return false;">Rows for Lenght</button>' +
-            '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawAbout();return false;">About</button>' +
-        '<div>'
+                    '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawStitchesPer10cm();return false;">Stitches/10cm</button>' +
+                    '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawRowsForLenght();return false;">Rows for Lenght</button>' +
+                    '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawAbout();return false;">About</button>' +
+                '<div>'
     createContent(html)
+    urlAddPath("Home")
 }
 
 function calculateStitchesPer10cm() {

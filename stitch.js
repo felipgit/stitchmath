@@ -120,7 +120,7 @@ function drawUnitConverter() {
     var html = '<div class="px-2 mt-2">' +
                     '<h1 class="mb-3 px-1">Unit Converter</h1>' +
                     '<form>' +
-                    '<label class="form-label px-1"><b>Centi Meters</b> (metric)</label>' +
+                    '<label class="form-label px-1"><b>Centimeters</b> (metric)</label>' +
                         '<div class="input-group mb-3 rounded-pill bg-white">' +
                             '<span class="input-group-icon" id="icon-cm"><i class="fas fa-lg fa-earth-europe"></i></span>' +
                             '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-cm" id="cm">' +

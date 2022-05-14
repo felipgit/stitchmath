@@ -9,8 +9,9 @@ function createMenu() {
         '<div class="collapse navbar-collapse" id="navbarNav">' +
         '<ul class="navbar-nav">' +
             '<li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onclick="drawHome();return false;">Home</a></li>' +
-            '<li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onclick="drawStitchesPer10cm();return false;">Stitches/10cm</a></li>' +
-            '<li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onclick="drawRowsForLenght();return false;">Rows for Lenght</a></li>' +
+            '<li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onclick="drawStitchGauge();return false;">Stitch Gauge</a></li>' +
+            '<li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onclick="drawRowGauge();return false;">Row Gauge</a></li>' +
+            '<li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onclick="drawUnitConverter();return false;">Unit Converter</a></li>' +
             '<li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onclick="drawAbout();return false;">About</a></li>' +
         '</ul>' +
         '</div>' +
@@ -39,9 +40,9 @@ function historyListener(event) {
     drawHome()
 }
 
-function drawStitchesPer10cm() {
+function drawStitchGauge() {
     var html = '<div class="px-2 mt-2">' +
-                    '<h1 class="mb-3 px-1">Stitches/10 cm</h1>' +
+                    '<h1 class="mb-3 px-1">Stitch Gauge</h1>' +
                     '<form>' +
                         '<label class="form-label px-1"><b>Stitches</b> (how many do you have)</label>' +
                         '<div class="input-group mb-3 rounded-pill bg-white">' +
@@ -77,9 +78,9 @@ function drawStitchesPer10cm() {
     });
 }
 
-function drawRowsForLenght() {
+function drawRowGauge() {
     var html = '<div class="px-2 mt-2">' +
-                    '<h1 class="mb-3 px-1">Rows for Lenght</h1>' +
+                    '<h1 class="mb-3 px-1">Row Gauge</h1>' +
                     '<form>' +
                     '<label class="form-label px-1"><b>Rows</b> (how many rows do you have per 10 cm)</label>' +
                         '<div class="input-group mb-3 rounded-pill bg-white">' +
@@ -115,6 +116,39 @@ function drawRowsForLenght() {
     });
 }
 
+function drawUnitConverter() {
+    var html = '<div class="px-2 mt-2">' +
+                    '<h1 class="mb-3 px-1">Unit Converter</h1>' +
+                    '<form>' +
+                    '<label class="form-label px-1"><b>Centi Meters</b> (metric)</label>' +
+                        '<div class="input-group mb-3 rounded-pill bg-white">' +
+                            '<span class="input-group-icon" id="icon-cm"><i class="fas fa-lg fa-earth-europe"></i></span>' +
+                            '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-cm" id="cm">' +
+                        '</div>' +
+                         '<label class="form-label px-1"><b>Inches</b> (imperial)</label>' +
+                        '<div class="input-group mb-3 rounded-pill bg-white">' +
+                            '<span class="input-group-icon" id="icon-inches"><i class="fas fa-lg fa-earth-americas"></i></span>' +
+                            '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-inches" id="inches">' +
+                        '</div>' +
+                    '</form>' +
+                    '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawHome();return false;">Home</button>' +
+                '</div>'
+    createContent(html)
+    urlAddPath("UnitConverter")
+    document.getElementById("cm").addEventListener("keyup", function (e) {
+        calculateUnitConverter("cm")
+    }, false);
+    document.getElementById("inches").addEventListener("keyup", function (e) {
+        calculateUnitConverter("inches")
+    }, false);
+    document.getElementById("cm").addEventListener("input", function (e) {
+        calculateUnitConverter("cm")
+    });
+    document.getElementById("inches").addEventListener("input", function (e) {
+        calculateUnitConverter("inches")
+    });
+}
+
 function drawAbout() {
     var html = '<div class="px-2 mt-2">' +
                     '<h1 class="mb-3">About</h1>' +
@@ -131,8 +165,9 @@ function drawAbout() {
 
 function drawHome() {
     var html = '<div class="d-grid gap-2 px-2 mt-2">' +
-                    '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawStitchesPer10cm();return false;">Stitches/10cm</button>' +
-                    '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawRowsForLenght();return false;">Rows for Lenght</button>' +
+                    '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawStitchGauge();return false;">Stitch Gauge</button>' +
+                    '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawRowGauge();return false;">Row Gauge</button>' +
+                    '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawUnitConverter();return false;">Unit Converter</button>' +
                     '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawAbout();return false;">About</button>' +
                 '<div>'
     createContent(html)
@@ -149,6 +184,22 @@ function calculateRowsForLenght() {
     var rows = parseInt(document.getElementById("rows").value)
     var distance = parseInt(document.getElementById("distance").value)
     document.getElementById("answer").value = rows/10*distance
+}
+
+function calculateUnitConverter(unit) {
+    let y=2.540005080010160020320040640081280162560325120650241300482600965201930403860807721615443230886461772923545847091694183388366776733553467106934213868427736855473710947421894843789687579375158750317500635001270002
+    let x = parseInt(document.getElementById(unit).value)
+    switch(unit) {
+    case "cm":
+        var answer = x/y
+        var opposite = "inches"
+        break
+    case "inches":
+        var answer = x*y
+        var opposite = "cm"
+        break
+    }
+    document.getElementById(opposite).value = answer
 }
 
 function main() {

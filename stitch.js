@@ -128,7 +128,7 @@ function drawStitchDistance() {
                         '</div>' +
                          '<label class="form-label px-1"><b>Stitches</b> (how many stitches you want to have)</label>' +
                         '<div class="input-group mb-3 rounded-pill bg-white">' +
-                            '<span class="input-group-icon" id="icon-distance"><i class="fas fa-lg fa-ruler-horizontal"></i></span>' +
+                            '<span class="input-group-icon" id="icon-distance"><i class="fas fa-lg fa-list-ul"></i></span>' +
                             '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-distance" id="stitches">' +
                         '</div>' +
                         '<label class="form-label px-1"><b>Answer</b> (how many far will that get you)</label>' +

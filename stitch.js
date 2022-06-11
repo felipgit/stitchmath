@@ -11,6 +11,7 @@ function createMenu() {
             '<li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onclick="drawHome();return false;">Home</a></li>' +
             '<li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onclick="drawStitchGauge();return false;">Stitch Gauge</a></li>' +
             '<li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onclick="drawRowGauge();return false;">Row Gauge</a></li>' +
+            '<li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onclick="drawStitchDistance();return false;">Stitch Distance</a></li>' +
             '<li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onclick="drawUnitConverter();return false;">Unit Converter</a></li>' +
             '<li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onclick="drawAbout();return false;">About</a></li>' +
         '</ul>' +
@@ -116,6 +117,44 @@ function drawRowGauge() {
     });
 }
 
+function drawStitchDistance() {
+    var html = '<div class="px-2 mt-2">' +
+                    '<h1 class="mb-3 px-1">Stitch Distance</h1>' +
+                    '<form>' +
+                    '<label class="form-label px-1"><b>Gauge</b> (how many stitches do you have per 10 cm)</label>' +
+                        '<div class="input-group mb-3 rounded-pill bg-white">' +
+                            '<span class="input-group-icon" id="icon-rows"><i class="fas fa-lg fa-align-justify"></i></span>' +
+                            '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-rows" id="gauge">' +
+                        '</div>' +
+                         '<label class="form-label px-1"><b>Stitches</b> (how many stitches you want to have)</label>' +
+                        '<div class="input-group mb-3 rounded-pill bg-white">' +
+                            '<span class="input-group-icon" id="icon-distance"><i class="fas fa-lg fa-ruler-horizontal"></i></span>' +
+                            '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-distance" id="stitches">' +
+                        '</div>' +
+                        '<label class="form-label px-1"><b>Answer</b> (how many far will that get you)</label>' +
+                        '<div class="input-group mb-3 rounded-pill bg-white">' +
+                            '<span class="input-group-icon" id="icon-answer"><i class="fas fa-lg fa-circle-check"></i></span>' +
+                            '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-answer" id="answer" readonly>' +
+                        '</div>' +
+                    '</form>' +
+                    '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawHome();return false;">Home</button>' +
+                '</div>'
+    createContent(html)
+    urlAddPath("SitchDistance")
+    document.getElementById("gauge").addEventListener("keyup", function (e) {
+        calculateStitchDistance()
+    }, false);
+    document.getElementById("stitches").addEventListener("keyup", function (e) {
+        calculateStitchDistance()
+    }, false);
+    document.getElementById("gauge").addEventListener("input", function (e) {
+        calculateStitchDistance()
+    });
+    document.getElementById("stitches").addEventListener("input", function (e) {
+        calculateStitchDistance()
+    });
+}
+
 function drawUnitConverter() {
     var html = '<div class="px-2 mt-2">' +
                     '<h1 class="mb-3 px-1">Unit Converter</h1>' +
@@ -184,6 +223,12 @@ function calculateRowsForLenght() {
     var rows = parseInt(document.getElementById("rows").value)
     var distance = parseInt(document.getElementById("distance").value)
     document.getElementById("answer").value = rows/10*distance
+}
+
+function calculateStitchDistance() {
+    var gauge = parseInt(document.getElementById("gauge").value)
+    var stitches = parseInt(document.getElementById("stitches").value)
+    document.getElementById("answer").value = 10/gauge*stitches
 }
 
 function calculateUnitConverter(unit) {

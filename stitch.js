@@ -206,6 +206,7 @@ function drawHome() {
     var html = '<div class="d-grid gap-2 px-2 mt-2">' +
                     '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawStitchGauge();return false;">Stitch Gauge</button>' +
                     '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawRowGauge();return false;">Row Gauge</button>' +
+                    '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawStitchDistance();return false;">Stitch Distance</button>' +
                     '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawUnitConverter();return false;">Unit Converter</button>' +
                     '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawAbout();return false;">About</button>' +
                 '<div>'

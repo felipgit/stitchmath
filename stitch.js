@@ -42,6 +42,7 @@ function historyListener(event) {
 }
 
 function drawStitchGauge() {
+    operators = []
     var html = '<div class="px-2 mt-2">' +
                     '<h1 class="mb-3 px-1">Stitch Gauge</h1>' +
                     '<form>' +
@@ -58,7 +59,7 @@ function drawStitchGauge() {
                         '<label class="form-label px-1"><b>Answer</b> (stitches/10 cm)</label>' +
                         '<div class="input-group mb-3 rounded-pill bg-white">' +
                             '<span class="input-group-icon" id="icon-answer"><i class="fas fa-lg fa-circle-check"></i></span>' +
-                            '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-answer" id="answer" readonly>' +
+                            '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-answer" id="answer">' +
                         '</div>' +
                     '</form>' +
                     '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawHome();return false;">Home</button>' +
@@ -84,6 +85,7 @@ function listenStitchGauge(enabled) {
 }
 
 function drawRowGauge() {
+    operators = []
     var html = '<div class="px-2 mt-2">' +
                     '<h1 class="mb-3 px-1">Row Gauge</h1>' +
                     '<form>' +
@@ -97,10 +99,10 @@ function drawRowGauge() {
                             '<span class="input-group-icon" id="icon-distance"><i class="fas fa-lg fa-ruler-horizontal"></i></span>' +
                             '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-distance" id="distance">' +
                         '</div>' +
-                        '<label class="form-label px-1"><b>Answer</b> (how far will that get you)</label>' +
+                        '<label class="form-label px-1"><b>Answer</b> (how many rows you will need)</label>' +
                         '<div class="input-group mb-3 rounded-pill bg-white">' +
                             '<span class="input-group-icon" id="icon-answer"><i class="fas fa-lg fa-circle-check"></i></span>' +
-                            '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-answer" id="answer" readonly>' +
+                            '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-answer" id="answer">' +
                         '</div>' +
                     '</form>' +
                     '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawHome();return false;">Home</button>' +
@@ -126,6 +128,7 @@ function listenRowGauge(enabled) {
 }
 
 function drawStitchDistance() {
+    operators = []
     var html = '<div class="px-2 mt-2">' +
                     '<h1 class="mb-3 px-1">Stitch Distance</h1>' +
                     '<form>' +
@@ -220,21 +223,68 @@ function drawHome() {
     urlAddPath("Home")
 }
 
-function calculateStitchesPer10cm() {
-    var stitches = parseInt(document.getElementById("stitches").value)
-    var distance = parseInt(document.getElementById("distance").value)
-    document.getElementById("answer").value = stitches/distance*10
+function calculateStitchesPer10cm(input) {
+    locked = true
+
+    if (!operators.includes(input)) {
+        operators.unshift(input)
+        operators = operators.slice(0, 2)
+    }
+
+    if (operators.length == 2) {
+        var stitches = parseInt(document.getElementById("stitches").value)
+        var distance = parseInt(document.getElementById("distance").value)
+        var answer = parseInt(document.getElementById("answer").value)
+
+        if (operators.includes("stitches") && operators.includes("distance")) {
+            document.getElementById("answer").value = stitches/distance*10
+        }
+
+        if (operators.includes("stitches") && operators.includes("answer")) {
+            document.getElementById("distance").value = stitches/answer*10
+        }
+
+        if (operators.includes("distance") && operators.includes("answer")) {
+            document.getElementById("stitches").value = answer*distance/10
+        }
+    }
+
+    locked = false
 }
 
-function calculateRowsForLenght() {
-    var rows = parseInt(document.getElementById("rows").value)
-    var distance = parseInt(document.getElementById("distance").value)
-    document.getElementById("answer").value = rows/10*distance
+function calculateRowsForLenght(input) {
+    locked = true
+
+    if (!operators.includes(input)) {
+        operators.unshift(input)
+        operators = operators.slice(0, 2)
+    }
+
+    if (operators.length == 2) {
+        listenStitchDistance(true)
+        var rows = parseInt(document.getElementById("rows").value)
+        var distance = parseInt(document.getElementById("distance").value)
+        var answer = parseInt(document.getElementById("answer").value)
+
+        if (operators.includes("rows") && operators.includes("distance")) {
+            document.getElementById("answer").value = rows/10*distance
+        }
+
+        if (operators.includes("rows") && operators.includes("answer")) {
+            document.getElementById("distance").value = answer/rows*10
+        }
+
+        if (operators.includes("distance") && operators.includes("answer")) {
+            document.getElementById("rows").value = answer/distance*10
+        }
+    }
+
+    locked = false
 }
 
 function calculateStitchDistance(input) {
     locked = true
-    
+
     if (!operators.includes(input)) {
         operators.unshift(input)
         operators = operators.slice(0, 2)
@@ -257,9 +307,10 @@ function calculateStitchDistance(input) {
         if (operators.includes("stitches") && operators.includes("distance")) {
             document.getElementById("gauge").value = 10/distance*stitches
         }
-        
+
         listenStitchDistance(true)
     }
+
     locked = false
 }
 

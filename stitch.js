@@ -107,12 +107,22 @@ function drawRowGauge() {
                 '</div>'
     createContent(html)
     urlAddPath("RowsForLenght")
-    document.getElementById("rows").addEventListener("input", function (e) {
-        calculateRowsForLenght()
-    });
-    document.getElementById("distance").addEventListener("input", function (e) {
-        calculateRowsForLenght()
-    });
+    listenRowGauge(true)
+}
+
+function listenRowGauge(enabled) {
+    if (enabled) {
+        if (!locked) {
+            document.getElementById("rows").addEventListener("input", function (e) {calculateRowsForLenght("rows")})
+            document.getElementById("distance").addEventListener("input", function (e) {calculateRowsForLenght("distance")})
+            document.getElementById("answer").addEventListener("input", function (e) {calculateRowsForLenght("answer")})
+        }
+    }
+    else {
+        document.getElementById("rows").removeEventListener("input", function (e) {calculateRowsForLenght("rows")})
+        document.getElementById("distance").removeEventListener("input", function (e) {calculateRowsForLenght("distance")})
+        document.getElementById("answer").removeEventListener("input", function (e) {calculateRowsForLenght("answer")})
+    }
 }
 
 function drawStitchDistance() {

@@ -134,13 +134,13 @@ function drawStitchDistance() {
 
 function listenStitchDistance(enabled) {
     if (enabled) {
-        console.log("listen on")
-        document.getElementById("gauge").addEventListener("input", function (e) {calculateStitchDistance("gauge")})
-        document.getElementById("stitches").addEventListener("input", function (e) {calculateStitchDistance("stitches")})
-        document.getElementById("distance").addEventListener("input", function (e) {calculateStitchDistance("distance")})
+        if (!locked) {
+            document.getElementById("gauge").addEventListener("input", function (e) {calculateStitchDistance("gauge")})
+            document.getElementById("stitches").addEventListener("input", function (e) {calculateStitchDistance("stitches")})
+            document.getElementById("distance").addEventListener("input", function (e) {calculateStitchDistance("distance")})
+        }
     }
     else {
-        console.log("listen off")
         document.getElementById("gauge").removeEventListener("input", function (e) {calculateStitchDistance("gauge")})
         document.getElementById("stitches").removeEventListener("input", function (e) {calculateStitchDistance("stitches")})
         document.getElementById("distance").removeEventListener("input", function (e) {calculateStitchDistance("distance")})
@@ -213,19 +213,15 @@ function calculateRowsForLenght() {
 }
 
 function calculateStitchDistance(input) {
-    console.log("calc start")
+    locked = true
     
     if (!operators.includes(input)) {
         operators.unshift(input)
         operators = operators.slice(0, 2)
-        console.log("updated operators")
     }
 
     if (operators.length == 2) {
         listenStitchDistance(false)
-        console.log(`operators ${operators}`)
-
-        console.log("in calc, get vars")
         var gauge = parseInt(document.getElementById("gauge").value)
         var stitches = parseInt(document.getElementById("stitches").value)
         var distance = parseInt(document.getElementById("distance").value)
@@ -243,8 +239,8 @@ function calculateStitchDistance(input) {
         }
         
         listenStitchDistance(true)
-        console.log("calc end")
     }
+    locked = false
 }
 
 function calculateUnitConverter(unit) {
@@ -269,4 +265,5 @@ function main() {
 }
 
 var operators = []
+var locked = false
 main()

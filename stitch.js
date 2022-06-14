@@ -65,12 +65,22 @@ function drawStitchGauge() {
                 '</div>'
     createContent(html)
     urlAddPath("StitchesPer10cm")
-    document.getElementById("stitches").addEventListener("input", function (e) {
-        calculateStitchesPer10cm()
-    });
-    document.getElementById("distance").addEventListener("input", function (e) {
-        calculateStitchesPer10cm()
-    });
+    listenStitchGauge(true)
+}
+
+function listenStitchGauge(enabled) {
+    if (enabled) {
+        if (!locked) {
+            document.getElementById("stitches").addEventListener("input", function (e) {calculateStitchesPer10cm("stitches")})
+            document.getElementById("distance").addEventListener("input", function (e) {calculateStitchesPer10cm("distance")})
+            document.getElementById("answer").addEventListener("input", function (e) {calculateStitchesPer10cm("answer")})
+        }
+    }
+    else {
+        document.getElementById("stitches").removeEventListener("input", function (e) {calculateStitchesPer10cm("stitches")})
+        document.getElementById("distance").removeEventListener("input", function (e) {calculateStitchesPer10cm("distance")})
+        document.getElementById("answer").removeEventListener("input", function (e) {calculateStitchesPer10cm("answer")})
+    }
 }
 
 function drawRowGauge() {

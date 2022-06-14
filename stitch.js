@@ -87,10 +87,10 @@ function drawRowGauge() {
                             '<span class="input-group-icon" id="icon-distance"><i class="fas fa-lg fa-ruler-horizontal"></i></span>' +
                             '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-distance" id="distance">' +
                         '</div>' +
-                        '<label class="form-label px-1"><b>Answer</b> (how many rows you need)</label>' +
+                        '<label class="form-label px-1"><b>Answer</b> (how far will that get you)</label>' +
                         '<div class="input-group mb-3 rounded-pill bg-white">' +
                             '<span class="input-group-icon" id="icon-answer"><i class="fas fa-lg fa-circle-check"></i></span>' +
-                            '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-answer" id="answer" readonly>' +
+                            '<input type="number" class="form-control form-control-lg input-custom" aria-describedby="icon-answer" id="answer">' +
                         '</div>' +
                     '</form>' +
                     '<button type="button" class="w-100 btn-lg btn btn-light rounded-pill" onclick="drawHome();return false;">Home</button>' +

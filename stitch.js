@@ -316,7 +316,7 @@ function calculateStitchDistance(input) {
 
 function calculateUnitConverter(unit) {
     let y=2.540005080010160020320040640081280162560325120650241300482600965201930403860807721615443230886461772923545847091694183388366776733553467106934213868427736855473710947421894843789687579375158750317500635001270002
-    let x = parseInt(document.getElementById(unit).value)
+    let x = parseFloat(document.getElementById(unit).value)
     switch(unit) {
     case "cm":
         var answer = x/y

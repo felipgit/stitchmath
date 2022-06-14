@@ -65,12 +65,6 @@ function drawStitchGauge() {
                 '</div>'
     createContent(html)
     urlAddPath("StitchesPer10cm")
-    document.getElementById("stitches").addEventListener("keyup", function (e) {
-        calculateStitchesPer10cm()
-    }, false);
-    document.getElementById("distance").addEventListener("keyup", function (e) {
-        calculateStitchesPer10cm()
-    }, false);
     document.getElementById("stitches").addEventListener("input", function (e) {
         calculateStitchesPer10cm()
     });
@@ -103,12 +97,6 @@ function drawRowGauge() {
                 '</div>'
     createContent(html)
     urlAddPath("RowsForLenght")
-    document.getElementById("rows").addEventListener("keyup", function (e) {
-        calculateRowsForLenght()
-    }, false);
-    document.getElementById("distance").addEventListener("keyup", function (e) {
-        calculateRowsForLenght()
-    }, false);
     document.getElementById("rows").addEventListener("input", function (e) {
         calculateRowsForLenght()
     });
@@ -141,12 +129,6 @@ function drawStitchDistance() {
                 '</div>'
     createContent(html)
     urlAddPath("SitchDistance")
-    document.getElementById("gauge").addEventListener("keyup", function (e) {
-        calculateStitchDistance()
-    }, false);
-    document.getElementById("stitches").addEventListener("keyup", function (e) {
-        calculateStitchDistance()
-    }, false);
     document.getElementById("gauge").addEventListener("input", function (e) {
         calculateStitchDistance()
     });
@@ -174,12 +156,6 @@ function drawUnitConverter() {
                 '</div>'
     createContent(html)
     urlAddPath("UnitConverter")
-    document.getElementById("cm").addEventListener("keyup", function (e) {
-        calculateUnitConverter("cm")
-    }, false);
-    document.getElementById("inches").addEventListener("keyup", function (e) {
-        calculateUnitConverter("inches")
-    }, false);
     document.getElementById("cm").addEventListener("input", function (e) {
         calculateUnitConverter("cm")
     });
